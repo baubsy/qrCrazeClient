@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import backEnd from "../backEnd";
 
-//const tempData = { qrId: "1" };
 
 const QRDisplay = () => {
     const [score, setScore] = useState(0);
     const id = useParams().qrId;
+    const navigate = useNavigate();
     useEffect(() => {
         const helper = async () => {
-            const response = await axios.get(`http://localhost:8080/qr/${id}`);
-            setScore(response.data.score);
+            try{
+                //const response = await axios.get(`http://localhost:8080/qr/${id}`);
+                const response = await backEnd.get(`/qr/${id}`)
+                setScore(response.data.score);
+                //console.log(response);
+            } catch(error){
+                //TODO make backend return 404, make real error page
+                console.log(error);
+                navigate('/')
+            }
+            
+            
+            
         };
         helper();
     }, []);
