@@ -24,7 +24,7 @@ const SignUp = () => {
         
     }, [])
 
-    const onSignInClick = async () => {
+    const onRegisterClick = async () => {
         await auth.signIn();
         let id_token = auth.currentUser.get().getAuthResponse().id_token;
         
@@ -45,9 +45,9 @@ const SignUp = () => {
     }
 
     return (
-        <button onClick={onSignInClick} className="ui red google button">
+        <button onClick={onRegisterClick} className="ui red google button">
                     <i className="google icon"/>
-                    Sign In With Google
+                    Register With Google
         </button>
     )
   
